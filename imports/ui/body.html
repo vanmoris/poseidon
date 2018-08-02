@@ -1,7 +1,7 @@
 
 <body>
 
-  <div class="container">
+  <div class="container"  id="wrapper">
   <br/>
     <img align="left" src="/images/bp_logo.png">
   <!-- <br/>
@@ -10,44 +10,39 @@
   <h1 class="bpColor">Welcome to Poseidon</h1>
   </div>
     <header class="sizeHeader">
-      <div class="background" >
+      <div id="wrapper" class="background" >
 
       <div class="transbox">
 
     <h2 class="bpColor">
-    Clicking the bouton will load database:
+    Clicking the load bouton will load database:
     </h2>
   </div>
      <form class="loadfile">
 	      <input type="button" class="btn" name="text3" value="Load Data" />
      </form>
      <br/>
-    <!--Warning: this uses .insert() and i think will allow duplicated data if you click multiple times <br/>
-    you can use  Mongo Shell by startint a new terminal, go the app folder and enter the command:<br/>
-      meteor mongo-->
 
     <hr/>
 
      <br/>
- <!--
-     <form class="new-task">
-        <input type="text" name="text" placeholder="Type to add new tasks" />
-      </form>
--->
-</div>
-   <h2 class="bpColor">
-    Search by Name of Vessel:
-   </h2>
-      <form class="search">
-          <img src="/images/search.png">
-          <input class="sizeImput" type="text" name="text2" placeholder="Enter name, press enter" />
-      </form>
-    <br/>
-    <h4>
-<br/>
-   </h4>
 
-   <br/>
+<h2 class="bpColor">
+ Search by Vessel Name or IMO:
+</h2>
+
+   <form class="search">
+
+       <input class="sizeImput" type="text" name="text2" placeholder="Enter Name or IMO of Vessel, than press Enter" />
+       <img src="/images/search.png">
+
+   </form>
+
+ <br/>
+
+<br/>
+</div>
+
     </header>
 
      <div class="textColor" id="msg"> Vessel informations </div>
@@ -60,6 +55,7 @@
       {{/each}}
     </ul>
 </div>
+
 </body>
 
 <template name="task">

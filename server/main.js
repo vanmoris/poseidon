@@ -2,11 +2,11 @@
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 import XLSX from 'xlsx';
+import moment from 'moment';
 
 import '../imports/api/tasks.js';
 // for some reason needed to do import { Tasks }
 import { Tasks } from '../imports/api/tasks.js';
-
 
 Meteor.methods({
   /* read the data and return the workbook object to the frontend */
@@ -26,21 +26,22 @@ Meteor.methods({
     wb = XLSX.readFile( basepath+'.excel/MarineData.xlsx' );
 
     // process_wb is now defined in server/lib/utils.js
-    const wsData = process_wb(wb, {Type:1, Name:2, Flag:3, vin:4, Date_Added:5},"json");
+    const wsData = process_wb(wb, {Type:1, Name:2, Flag:3, vin:4, Date_Added:5}, "json");
 
     // insert data into Tasks mongodb collection that is imported on top
   //const test = wsData.find().fetch();
 
-//if(test === NULL && task.insert.Date().format('ss') > 86400){
-
-  //wsData.forEach(r => Tasks.insert(r));
   wsData.forEach(r => Tasks.update(r,r,{upsert: true}));
+  //wsData.forEach(r => Tasks.insert(r));
+  //var date = new Date();
+  //var inDate= moment(date).calendar();
 
-//}
-//else
-//{
-//  $('#msg').html("info> file already loaded");
-//}
+  //wsData.forEach(r => Tasks.insert(r, {"time": inDate}));
+
+  //Data.forEach(r => Tasks.update(r,r, {Time: inDate}, {upsert: true}));
+
+  //wsData.forEach(r => Tasks.update(r, r, {}, {$set:{ "date": new Date()}},{upsert: true}));
+
     // not sure if we need to return anything
     return "this is a return message form server upload(), looks like we are done";
   },

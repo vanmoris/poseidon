@@ -2,8 +2,14 @@ import { Template } from 'meteor/templating';
 import { ReactiveDict } from 'meteor/reactive-dict';
 import { Tasks } from '../api/tasks.js';
 import XLSX from 'xlsx';
+import moment from 'moment';
 
 import './body.html';
+
+Template.registerHelper('fromNow', function(date){
+  if (date)
+  return moment(date).fromNow(true);
+});
 
 Template.body.onCreated(function bodyOnCreated() {
   this.state = new ReactiveDict();
@@ -21,10 +27,33 @@ Template.body.helpers({
     // not currently used
     // Show newest tasks at the top
     const instance = Template.instance();
-    const vesselname = instance.state.get('vesselname')
+
+    const vesselname = instance.state.get('vesselname');
+    const vesselvin = instance.state.get('vesselvin');
+
     if (vesselname) {
        // const r = Tasks.find({ text: vesselname});
        var r = Tasks.findOne({ text: vesselname});
+       if(typeof r !== "undefined" ){
+    console.log("2111");
+
+ 	  var sh =  XLSX.utils.json_to_sheet(r);
+    console.log("2111222222");
+
+ 	  var table =  XLSX.utils.sheet_to_txt(sh);
+    console.log("2232232333333333333333333333");
+
+          return table;
+       }
+       else{
+	           return "not found data";
+	          }
+    }
+
+/////////Copied vesselname if
+    if (vesselvin) {
+       // const r = Tasks.find({ text: vesselname});
+       var r = Tasks.findOne({ text: vesselvin});
        if(typeof r !== "undefined" ){
     console.log("2111");
 
@@ -39,42 +68,26 @@ Template.body.helpers({
 	  return "not found da";
 	}
     }
+//////////End copied vesselname if
 
   },
 });
 
 Template.body.events({
-  'submit .new-task'(event) {
-    // Prevent default browser form submit
-    event.preventDefault();
-
-    // Get value from form element
-    const target = event.target;
-    const text = target.text.value;
-
-
-    //instead of "inser: we are going to try "uddate"
-    // Insert a task into the collection
-
-      Tasks.insert({
-        text,
-        createdAt: new Date(), // current time
-        });
-
-
-        // Clear form
-        target.text.value = '';
-  },
 
   'click .loadfile': function(event){
-
-       Meteor.call('readxlsx', function(err) {
+    //console.log(Tasks.findOne("loaded", true));
+     Meteor.call('readxlsx', function(err) {
            if(err) {
                console.error(err);
 	       $('#msg').html("info>  Error loading excel file, check server log");
            }
            else {
-               $('#msg').html("info>  Finished reading file");
+             var date = new Date();
+             var inDate= moment(date).calendar();
+
+               $('#msg').html("info>  Finished loading Data file "+ inDate);
+               console.log(inDate);
              }
       });
   },
@@ -83,36 +96,49 @@ Template.body.events({
     // Prevent default browser form submit
     event.preventDefault();
 
-    // Get value from form element
+    // Get value from form element for vessel Name
     const target = event.target;
     const vesselname = target.text2.value;
+
+    //Get value from form element for vessel vin
+    const vesselvin = target.text2.value;
 
     console.log("hi");
 
     // Insert a task into the collection
     //{Type:1, Name:2, Flag:3, vin:4, Date_Added:5}
-    const results = Tasks.findOne({ Name: vesselname });
-    //const results = Tasks.find({ Name: vesselname}).fetch();
+    const results = Tasks.findOne({
+      $or:[
+        { Name: vesselname },
+        { vin:vesselvin }
+      ]
+    });
 
-    //trying to print results into div
-    //still having difulcty printing in div
+    //const results = Tasks.find({ Name: vesselname}).fetch();
+    //print results into div
     document.getElementById("printsearch").innerHTML = JSON.stringify(results);
+    //document.getElementById("printsearch").innerHTML = JSON.stringify(resultsV);
 
     //Used "alert" to test if the results could print out
     //alert(JSON.stringify(results));
 
     console.log(results);
 
+    //console.log(new Date(parseInt(results._id.slice(0,8), 16) *1000));
     instance.state.set('Name', vesselname);
-    //console.log(vesselname);
+    instance.state.set('vin', vesselvin);
 
+    //console.log(vesselname);
     // update the indicator box with color and content
-     if(typeof results === "undefined" ){
+     if(typeof results === "undefined"){
       $('#indicator').css({"background-color":"red","color":"white"});
-      $('#indicator').html("not found");
-    }else{
+      $('#indicator').html("Not Found");
+      }
+      else
+      {
        $('#indicator').css({"background-color":"green","color":"white"});
-       $('#indicator').html(" found");
+       $('#indicator').html("Found");
+     }
       // var sheet = XLSX.utils.json_to_sheet(results.pretty());
        // setup options
        //       var s2hopts = { editable: falsea};
@@ -120,7 +146,5 @@ Template.body.events({
        // var html = XLSX.utils.sheet_to_html(sheet);
      //       $('#indicator').html(html);
 
-    }
   },
-
 });
