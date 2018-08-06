@@ -77,17 +77,17 @@ Template.body.events({
 
   'click .loadfile': function(event){
     //console.log(Tasks.findOne("loaded", true));
-     Meteor.call('readxlsx', function(err) {
+     Meteor.call('readxlsx', function(err, messageFromServer) {
            if(err) {
                console.error(err);
 	       $('#msg').html("info>  Error loading excel file, check server log");
            }
            else {
-             var date = new Date();
-             var inDate= moment(date).calendar();
-
-               $('#msg').html("info>  Finished loading Data file "+ inDate);
-               console.log(inDate);
+             //var date = new Date();
+            //var inDate= moment(date).calendar();
+            //$('#msg').html("info>  Finished loading Data file "+ inDate);
+              $('#msg').html("info>  "+ messageFromServer);
+            //console.log(inDate);
              }
       });
   },
