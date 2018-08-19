@@ -1,63 +1,56 @@
-
 <body>
-
   <div class="container"  id="wrapper">
-  <br/>
-    <img align="left" src="/images/bp_logo.png">
-  <!-- <br/>
-  <br/> -->
+    <img class="bpimgSize" align="left" src="/images/bp_logo.png">
+    <br/>
     <div id="welcome">
-  <h1 class="bpColor">Welcome to Poseidon</h1>
-  </div>
+      <img class="imgSize"  src="/images/poseidonLogo.png">
+      <br/>
+      <h1 class="bpColor"> Welcome to Poseidon</h1>
+      <br/>
+      <h2 class="contentfont">
+         Search by Vessel Name or IMO:</h2>
+    </div>
     <header class="sizeHeader">
-      <div id="wrapper" class="background" >
-
-      <div class="transbox">
-
-    <h2 class="bpColor">
-    Clicking the load bouton will load database:
-    </h2>
-  </div>
-     <form class="loadfile">
-	      <input type="button" class="btn" name="text3" value="Load Data" />
+    <div id="backgroundWrapper" class="background" >
+      <br/>
+      <br/>
+     <form class="search">
+       <div class="wrap">
+       <input class="sizeImput" type="text"  name="text2" placeholder="Enter Name or IMO of Vessel, than press Enter" />
+       <img src="/images/search.png">
+     </div>
      </form>
      <br/>
-
-    <hr/>
-
      <br/>
-
-<h2 class="bpColor">
- Search by Vessel Name or IMO:
-</h2>
-
-   <form class="search">
-
-       <input class="sizeImput" type="text" name="text2" placeholder="Enter Name or IMO of Vessel, than press Enter" />
-       <img src="/images/search.png">
-
-   </form>
-
- <br/>
-
-<br/>
-</div>
-
-    </header>
-
-     <div class="textColor" id="msg"> Vessel informations </div>
-     <div id="indicator">[ =  = ] </div>
-     <div class="textColor" id="printsearch"> Result <br/> </div>
-
-    <ul>
-      {{#each tasks}}
-        {{> task}}
-      {{/each}}
-    </ul>
-</div>
-
+   </div>
+  </header>
+  <div id="indicator">[ =  = ] </div>
+  <div class="textColor" id="printsearch"> Search Result <br/> </div>
+  <!-- {"_id":"A746zwwWmTgHrHNKA",
+        "Type":"Vessel",
+        "Name":"COSCO HAIFA",
+        "Flag":"Hong Kong",
+        "vin":"9484338",
+        "Date_Added":"4-Jan-17"} -->
+        <!-- {{#each results}}
+        {{Name}}
+        {{/each}} -->
+        {{results.Name}}
+<ul>
+   {{#each tasks}}
+     {{> task}}
+   {{/each}}
+</ul>
+<div class="textColor"> Vessel information </div>
+    <h2  class="contentfont">Last time Data was loaded: </h2>
+    {{ getTimeStamp }}
+    <h2 class="contentfont">, if need reloading click on "Load Data" button:</h2>
+    <form class="loadfile">
+       <input type="button" class="btn" name="text3" value="Load Data" />
+       <div  class="textColor" id="msg"> Data loading Informations</div>
+     </form>
+  </div>
 </body>
-
 <template name="task">
   <!--<li>{{text}}</li>-->
 </template>

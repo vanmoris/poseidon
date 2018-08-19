@@ -23,54 +23,14 @@ Template.body.helpers({
       console.log(r);
       return r;
  },
- vessel() {
-    // not currently used
-    // Show newest tasks at the top
-    const instance = Template.instance();
 
-    const vesselname = instance.state.get('vesselname');
-    const vesselvin = instance.state.get('vesselvin');
+ getTimeStamp() {
+ //   return Tasks.find({}, { sort: { createdAt: -1 } });
+      const dbTimestamp = moment(Tasks.findOne({},{"loaded_ts":1}).loaded_ts);
+      console.log(dbTimestamp);
+      return dbTimestamp;
+ },
 
-    if (vesselname) {
-       // const r = Tasks.find({ text: vesselname});
-       var r = Tasks.findOne({ text: vesselname});
-       if(typeof r !== "undefined" ){
-    console.log("2111");
-
- 	  var sh =  XLSX.utils.json_to_sheet(r);
-    console.log("2111222222");
-
- 	  var table =  XLSX.utils.sheet_to_txt(sh);
-    console.log("2232232333333333333333333333");
-
-          return table;
-       }
-       else{
-	           return "not found data";
-	          }
-    }
-
-/////////Copied vesselname if
-    if (vesselvin) {
-       // const r = Tasks.find({ text: vesselname});
-       var r = Tasks.findOne({ text: vesselvin});
-       if(typeof r !== "undefined" ){
-    console.log("2111");
-
- 	  var sh =  XLSX.utils.json_to_sheet(r);
-    console.log("2111222222");
-
- 	  var table =  XLSX.utils.sheet_to_txt(sh);
-    console.log("2232232333333333333333333333");
-
-          return table;
-       }else{
-	  return "not found da";
-	}
-    }
-//////////End copied vesselname if
-
-  },
 });
 
 Template.body.events({
@@ -98,12 +58,10 @@ Template.body.events({
 
     // Get value from form element for vessel Name
     const target = event.target;
-    const vesselname = target.text2.value;
+    const vesselname = target.text2.value.toUpperCase();
 
     //Get value from form element for vessel vin
-    const vesselvin = target.text2.value;
-
-    console.log("hi");
+    const vesselvin = target.text2.value.toUpperCase();
 
     // Insert a task into the collection
     //{Type:1, Name:2, Flag:3, vin:4, Date_Added:5}
@@ -114,15 +72,13 @@ Template.body.events({
       ]
     });
 
+    const htmlTable= getHTMLtable(results);
     //const results = Tasks.find({ Name: vesselname}).fetch();
     //print results into div
-    document.getElementById("printsearch").innerHTML = JSON.stringify(results);
-    //document.getElementById("printsearch").innerHTML = JSON.stringify(resultsV);
+    //document.getElementById("printsearch").innerHTML = JSON.stringify(results);
+    document.getElementById("printsearch").innerHTML = htmlTable;
 
-    //Used "alert" to test if the results could print out
-    //alert(JSON.stringify(results));
-
-    console.log(results);
+    //console.log(results);
 
     //console.log(new Date(parseInt(results._id.slice(0,8), 16) *1000));
     instance.state.set('Name', vesselname);
