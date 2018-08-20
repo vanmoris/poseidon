@@ -55,10 +55,11 @@ form {
   position: relative;
 }
 #wrapper{
-  marging-left: auto;
+  margin-left: auto;
   margin-right: auto;
   width: 654px;
   height: auto;
+  padding-top: 2px;
 }
 #backgroundWrapper{
   height: 300px;
@@ -88,6 +89,12 @@ form {
 }
 #login-buttons {
   display: block;
+}
+#printsearch{
+  margin-left: auto;
+  margin-right: auto;
+  width: 654px;
+  font-size: 15px;
 }
 .container {
   font-family: sans-serif;
@@ -233,113 +240,65 @@ header .hide-completed {
 
 
 @media only screen
-and (min-width: 375px)
-and (max-width: 750px)
+and (min-width: 320px)
+and (max-width: 480px)
 and (-webkit-min-device-pixel-ratio: 3) {
+
+    body{
+      min-width: 320px;
+      max-width: 480px;
+    }
+
     #block1, #block2 {
         width: 100%;
     }
-
-    body{
-      width: 375px;
-      
-      padding: 0px;
-      margin: 0px;
-    }
-
-    div.background{
-      background-size: auto;
-      width: 480;
-    }
-
-    li{
-      pading: 12px 15px;
-    }
-
-    form {
-      margin-top: 10px;
-      margin-bottom: -10px;
-      position: relative;
-
-    }
-
-    #wrap{
-      width: 375px;
-      height: 100%;
-    }
-
     #wrapper{
-      width: 100%;
-      height: auto;
-    }
-
-    #backgroundWrapper{
-     height: 100px;
-      width: 375px;
-    }
-
-    #indicator{
-      width: 20%;
-      }
-
-    #welcome{
-      padding: 0;
-      margin: 0;
-      text-align:center;
-      display: block;
       margin-left: auto;
       margin-right: auto;
-      width: 375px;
-    }
+      min-width: 315px;
+      max-width: 480px;
+      height: auto;
 
-    #divfix{
-      position: relative;
     }
-
-    #login-buttons {
-      display: block;
-    }
-
-    .container {
-      font-family: sans-serif;
-      background-image: linear-gradient(to bottom, #d0edf5, #e1e5f0 100%);
-      background-color: #315481;
-      background-attachment: 100%;
-      background-size: contain;
+    #backgroundWrapper{
+      height: 300px;
+      min-width: 270px;
       padding: 0px;
       margin: 0px;
-      width: 375px;
-      margin:0 auto;
-      min-height: 100%;
-      background: white;
     }
+    #welcome{
+      text-align:center;
+      display: block;
+      min-width: 280px;
+      max-width: 480px;
+    }
+    #printsearch{
+      min-width: 280px;
+      max-width: 480px;
+
+    }
+    .background{
+      min-width: 270px;
+      max-width: 480px;
+    }
+
+    .search{
+      text-align:center;
+      display: block;
+      min-width: 270px;
+      max-width: 480px;
+    }
+
     .sizeImput{
+      min-width: 235px;
+      max-width: 250px;
+    }
+
+    .textColor{
+      min-width: 280px;
+      max-width: 480px;
       font-size: 10px;
-      border-radius: 10px;
-      border: 3px solid green;
-      background-color: white;
-      color:#53BA53;
-      padding: 10px 50px;
-      max-width: 500px;
-      min-width: 250px;
-      margin:0 auto;
-      align-items: center;
-      display: inline-block;
     }
-
-    .wrap{
-      width: 350px;
-
-    }
-
-    .bpColor{
-      width: auto;
-      height: auto;
-      color:#429642;
-      margin-right: 0px;
-      text-align: center;
-    }
-
 }
 
 

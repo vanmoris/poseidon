@@ -25,7 +25,6 @@ Template.body.helpers({
  },
 
  getTimeStamp() {
- //   return Tasks.find({}, { sort: { createdAt: -1 } });
       const dbTimestamp = moment(Tasks.findOne({},{"loaded_ts":1}).loaded_ts);
       console.log(dbTimestamp);
       return dbTimestamp;
