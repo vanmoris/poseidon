@@ -33,7 +33,6 @@ Template.body.helpers({
 });
 
 Template.body.events({
-
   'click .loadfile': function(event){
     //console.log(Tasks.findOne("loaded", true));
      Meteor.call('readxlsx', function(err, messageFromServer) {
@@ -42,11 +41,7 @@ Template.body.events({
 	       $('#msg').html("info>  Error loading excel file, check server log");
            }
            else {
-             //var date = new Date();
-            //var inDate= moment(date).calendar();
-            //$('#msg').html("info>  Finished loading Data file "+ inDate);
               $('#msg').html("info>  "+ messageFromServer);
-            //console.log(inDate);
              }
       });
   },
@@ -57,10 +52,10 @@ Template.body.events({
 
     // Get value from form element for vessel Name
     const target = event.target;
-    const vesselname = target.text2.value.toUpperCase();
+    const vesselname = target.text2.value.toUpperCase().trim();
 
     //Get value from form element for vessel vin
-    const vesselvin = target.text2.value.toUpperCase();
+    const vesselvin = target.text2.value.toUpperCase().trim();
 
     // Insert a task into the collection
     //{Type:1, Name:2, Flag:3, vin:4, Date_Added:5}

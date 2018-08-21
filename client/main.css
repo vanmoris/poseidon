@@ -54,12 +54,18 @@ form {
   margin-bottom: -10px;
   position: relative;
 }
-#wrapper{
+#wrap{
   margin-left: auto;
   margin-right: auto;
-  width: 654px;
+  width: 648px;
+  height: auto;
+}
+#wrapper{
+  margin-right: auto;
+  width: 648px;
   height: auto;
   padding-top: 2px;
+  margin-left: -5.5px;
 }
 #backgroundWrapper{
   height: 300px;
