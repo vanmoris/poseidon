@@ -23,7 +23,7 @@ div.background{
   background-repeat: no-repeat;
   background-position: center;
   background-size: 100%;
-  max-width: 100%;
+  max-width: 660px;
   height: 230px;
 }
 div.transbox{
@@ -57,19 +57,24 @@ form {
 #wrap{
   margin-left: auto;
   margin-right: auto;
-  width: 648px;
+  width: 680px;
   height: auto;
 }
 #wrapper{
   margin-right: auto;
-  width: 648px;
+  width: 633px;
   height: auto;
   padding-top: 2px;
   margin-left: -5.5px;
 }
 #backgroundWrapper{
   height: 300px;
-  width: 657px;
+  width: 680px;
+}
+#msg{
+  margin-left: auto;
+  margin-right: auto;
+  width: 633px
 }
 #indicator{
   width: 60px;
@@ -99,7 +104,7 @@ form {
 #printsearch{
   margin-left: auto;
   margin-right: auto;
-  width: 654px;
+  width: 633px;
   font-size: 15px;
 }
 .container {
@@ -247,13 +252,9 @@ header .hide-completed {
 
 @media only screen
 and (min-width: 320px)
-and (max-width: 480px)
+and (max-width: 460px)
 and (-webkit-min-device-pixel-ratio: 3) {
 
-    body{
-      min-width: 320px;
-      max-width: 480px;
-    }
 
     #block1, #block2 {
         width: 100%;
@@ -261,14 +262,19 @@ and (-webkit-min-device-pixel-ratio: 3) {
     #wrapper{
       margin-left: auto;
       margin-right: auto;
-      min-width: 315px;
-      max-width: 480px;
+      min-width: 280px;
+      max-width: 420px;
       height: auto;
+    }
+    #wrap{
+      min-width: 280px;
+      max-width: 450px;
 
     }
     #backgroundWrapper{
       height: 300px;
-      min-width: 270px;
+      min-width: 280px;
+      max-width: 440px;
       padding: 0px;
       margin: 0px;
     }
@@ -276,23 +282,23 @@ and (-webkit-min-device-pixel-ratio: 3) {
       text-align:center;
       display: block;
       min-width: 280px;
-      max-width: 480px;
+      max-width: 400px;
     }
     #printsearch{
       min-width: 280px;
-      max-width: 480px;
+      max-width: 400px;
 
     }
     .background{
       min-width: 270px;
-      max-width: 480px;
+      max-width: 400px;
     }
 
     .search{
       text-align:center;
       display: block;
       min-width: 270px;
-      max-width: 480px;
+      max-width: 400px;
     }
 
     .sizeImput{
@@ -302,7 +308,7 @@ and (-webkit-min-device-pixel-ratio: 3) {
 
     .textColor{
       min-width: 280px;
-      max-width: 480px;
+      max-width: 400px;
       font-size: 10px;
     }
 }
