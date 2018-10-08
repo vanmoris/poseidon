@@ -13,10 +13,10 @@ Meteor.methods({
   readxlsx: () => {
       const path = Npm.require('path');
       const basepath = path.resolve('.').split('.meteor')[0];
-      wb = XLSX.readFile( basepath+'.excel/MarineData.xlsx' );
+      wb = XLSX.readFile( basepath+'.excel/rawdata.xlsx' );
 
       // process_wb is now defined in server/lib/utils.js
-      const wsData = process_wb(wb, {Type:1, Name:2, Flag:3, vin:4, Date_Added:5}, "json");
+      const wsData = process_wb(wb, {Type:1, Name:2, Numbers:3, flag:4, Date_Added:5}, "json");
 
     // insert data into Tasks mongodb collection that is imported on top
     //const test = wsData.find().fetch();
@@ -48,10 +48,10 @@ Meteor.startup(() => {
   {
       const path = Npm.require('path');
       const basepath = path.resolve('.').split('.meteor')[0];
-      wb = XLSX.readFile( basepath+'.excel/MarineData.xlsx' );
+      wb = XLSX.readFile( basepath+'.excel/rawdata.xlsx' );
 
       // process_wb is now defined in server/lib/utils.js
-      const wsData = process_wb(wb, {Type:1, Name:2, Flag:3, vin:4, Date_Added:5}, "json");
+      const wsData = process_wb(wb, {Type:1, Name:2, Numbers:3, Flag:4, Date_Added:5}, "json");
 
       let date = new Date();
       // this works

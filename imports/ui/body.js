@@ -55,14 +55,14 @@ Template.body.events({
     const vesselname = target.text2.value.toUpperCase().trim();
 
     //Get value from form element for vessel vin
-    const vesselvin = target.text2.value.toUpperCase().trim();
+    const vesselnumber = target.text2.value.toUpperCase().trim();
 
     // Insert a task into the collection
     //{Type:1, Name:2, Flag:3, vin:4, Date_Added:5}
     const results = Tasks.findOne({
       $or:[
         { Name: vesselname },
-        { vin:vesselvin }
+        { Numbers:vesselnumber }
       ]
     });
 
@@ -76,7 +76,7 @@ Template.body.events({
 
     //console.log(new Date(parseInt(results._id.slice(0,8), 16) *1000));
     instance.state.set('Name', vesselname);
-    instance.state.set('vin', vesselvin);
+    instance.state.set('Numbers', vesselnumber);
 
     //console.log(vesselname);
     // update the indicator box with color and content
